@@ -1,5 +1,4 @@
 FROM centos:7
-MAINTAINER Francois Dazan
 
 ENV FFMPEG_VERSION=2.8.3 \
     YASM_VERSION=1.3.0   \
