@@ -3,18 +3,18 @@ INPUT="$INPUT"
 CUSTOMER="$CUSTOMER"
 EXTENSION="$EXTENSION"
 NAME=$(echo $INPUT | cut -d '.' -f1)
-FFMPEG="ffmpeg -i /progress/$CUSTOMER/$INPUT"
+FFMPEG="ffmpeg -i /data/progress/$CUSTOMER/$INPUT"
 
-if [ ! -d /complete/$CUSTOMER ];
+if [ ! -d /data/complete/$CUSTOMER ];
 then
-  mkdir /complete/$CUSTOMER
+  mkdir /data/complete/$CUSTOMER
 fi
-if [ ! -d /progress/$CUSTOMER ];
+if [ ! -d /data/progress/$CUSTOMER ];
 then
-  mkdir /progress/$CUSTOMER
+  mkdir /data/progress/$CUSTOMER
 fi
 
-mv /incomplete/$INPUT /progress/$CUSTOMER/
+mv /data/incomplete/$INPUT /data/progress/$CUSTOMER/
 
 if [ -n "{$INPUT}" ];
 then
@@ -39,12 +39,12 @@ then
     FFMPEG=$FFMPEG $FRAMERATE
   fi
 
-  FFMPEG="$FFMPEG /complete/$CUSTOMER/$NAME.$EXTENSION"
+  FFMPEG="$FFMPEG /data/complete/$CUSTOMER/$NAME.$EXTENSION"
   $FFMPEG
 
-  if [ -f /complete/$CUSTOMER/$NAME.$EXTENSION ];
+  if [ -f /data/complete/$CUSTOMER/$NAME.$EXTENSION ];
   then
-  rm -f /incomplete/$INPUT
-  rm -rf /progress/$CUSTOMER
+  rm -f /data/incomplete/$INPUT
+  rm -rf /data/progress/$CUSTOMER
   fi
 fi
