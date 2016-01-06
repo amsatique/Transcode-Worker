@@ -5,11 +5,16 @@ EXTENSION="$EXTENSION"
 NAME=$(echo $INPUT | cut -d '.' -f1)
 FFMPEG="ffmpeg -i /progress/$CUSTOMER/$INPUT"
 
-mv /incomplete/$INPUT /progress/$CUSTOMER/$INPUT
 if [ ! -d /complete/$CUSTOMER ];
 then
-  mkdir -p /complete/$CUSTOMER
+  mkdir /complete/$CUSTOMER
 fi
+if [ ! -d /progress/$CUSTOMER ];
+then
+  mkdir /progress/$CUSTOMER
+fi
+
+mv /incomplete/$INPUT /progress/$CUSTOMER/
 
 if [ -n "{$INPUT}" ];
 then
@@ -33,8 +38,13 @@ then
     FRAMERATE='-r ${FRAMERATE}'
     FFMPEG=$FFMPEG $FRAMERATE
   fi
+
   FFMPEG="$FFMPEG /complete/$CUSTOMER/$NAME.$EXTENSION"
   $FFMPEG
-  if [ -f /complete/$CUSTOMER/$NAME.$EXTENSION ]
-  rm -f /imcomplete/$INPUT
+
+  if [ -f /complete/$CUSTOMER/$NAME.$EXTENSION ];
+  then
+  rm -f /incomplete/$INPUT
+  rm -rf /progress/$CUSTOMER
+  fi
 fi
