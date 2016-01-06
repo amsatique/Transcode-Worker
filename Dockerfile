@@ -16,7 +16,7 @@ ENV FFMPEG_VERSION=2.8.3 \
 WORKDIR /tmp/workdir
 COPY run.sh /run.sh
 COPY transcode.sh /transcode.sh
-RUN chmod 777 /run.sh
+RUN chmod 777 /*.sh
 RUN /run.sh
 
 CMD ["/transcode.sh"]
