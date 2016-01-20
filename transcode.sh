@@ -17,7 +17,7 @@ fi
 # Move to progress folder
 mv /data/incomplete/$INPUT /data/progress/$CUSTOMER/
 
-# Check if another file have same name in /complete
+# Check if another file have same name in /complete   ##### A CHECKER DANS LE CORE #####
 COUNTER=1
 if [ -f /data/complete/$CUSTOMER/$NAME ]; then
         while [ -f /data/complete/$CUSTOMER/$NAME-$COUNTER ]; do
