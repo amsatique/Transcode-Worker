@@ -1,7 +1,7 @@
 #!/bin/bash
-INPUT="$INPUT"
-CUSTOMER="$CUSTOMER"
-EXTENSION="$EXTENSION"
+INPUT="${INPUT}"
+CUSTOMER="${CUSTOMER}"
+EXTENSION="${EXTENSION}"
 NAME=$(echo $INPUT | cut -d '.' -f1)
 FFMPEG="ffmpeg -i /data/progress/$CUSTOMER/$INPUT"
 
@@ -51,13 +51,13 @@ then
     FFMPEG=$FFMPEG $FRAMERATE
   fi
 
-  FFMPEG="$FFMPEG /data/complete/$CUSTOMER/$NAME.$EXTENSION"
+  FFMPEG="$FFMPEG /data/progress/$CUSTOMER/$NAME.$EXTENSION"
   $FFMPEG
 
   # Check end of build and flush data folder
-  if [ -f /data/complete/$CUSTOMER/$NAME.$EXTENSION ];
+  if [ -f /data/progress/$CUSTOMER/$NAME.$EXTENSION ];
   then
   rm -f /data/incomplete/$INPUT
-  rm -rf /data/progress/$CUSTOMER
   fi
 fi
+exit

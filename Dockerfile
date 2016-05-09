@@ -11,15 +11,14 @@ ENV FFMPEG_VERSION=2.8.3 \
     VPX_VERSION=1.4.0    \
     XVID_VERSION=1.3.4   \
     FDKAAC_VERSION=0.1.4 \
-    X265_VERSION=1.8
+    X265_VERSION=1.8	 \
+    CHUNK_LEN=30
 
 WORKDIR /tmp/workdir
-COPY run.sh /run.sh
 
-RUN chmod 777 /*.sh
-RUN /run.sh
+COPY scripts /scripts
 
-COPY transcode.sh /transcode.sh
-RUN chmod 777 /*.sh
+RUN chmod 777 /scripts/*.sh
+RUN /scripts/run.sh
 
-CMD ["/transcode.sh"]
+CMD ["/scripts/master.sh"]
